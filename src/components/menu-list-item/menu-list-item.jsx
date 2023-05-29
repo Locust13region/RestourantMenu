@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/menuSlice";
 import "./menu-list-item.scss";
 
-const MenuListItem = ({ d, title, category, url, price }) => {
+const MenuListItem = ({ menuItem }) => {
+	const dispatch = useDispatch();
+	const { title, category, url, price } = menuItem;
 	return (
 		<li className="menu__item">
 			<div className="menu__title">{title}</div>
@@ -15,7 +19,14 @@ const MenuListItem = ({ d, title, category, url, price }) => {
 			<div className="menu__price">
 				Price: <span>{price}$</span>
 			</div>
-			<button className="menu__btn">Add to cart</button>
+			<button
+				className="menu__btn"
+				onClick={() => {
+					dispatch(addToCart(menuItem));
+				}}
+			>
+				Add to cart
+			</button>
 		</li>
 	);
 };
